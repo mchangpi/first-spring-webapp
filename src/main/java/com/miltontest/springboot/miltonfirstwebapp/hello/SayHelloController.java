@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class SayHelloController {
 
-  @RequestMapping("hello")
-  @ResponseBody
+  @RequestMapping("sayhello")
+  @ResponseBody //the object returned is automatically serialized into JSON
   public String sayHello() {
     return "Hello! Milton 1st Web App";
   }
   
-  @RequestMapping("hellojsp")
-  public String sayHelloHtml() {
-    return "hellojsp";
+  @RequestMapping("hello")
+  public String hello() {
+    return "hello";
   }
 }
