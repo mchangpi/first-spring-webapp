@@ -5,6 +5,6 @@
   <body>
     <h4>Welcome to Milton Spring Boot app</h4>
     <div>Your name: ${name}</div>
-    <div>Your Password(removed later): ${password}</div>
+    <!--<div>Your Password(removed later): ${password}</div>-->
   </body>
 </html>
