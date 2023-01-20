@@ -1,8 +1,13 @@
 <html>
   <head>
-    <title>Welcome to Milton 1st web app</title>
+    <title>Milton first web app</title>
   </head>
   <body>
-    <h3>Welcome to the Login Page ${name}</h3>
+    <h4>Welcome to the Login Page!</h4>
+    <form method="post">
+    	Name: <Input type="text" name="name">
+    	Password: <Input type="password" name="password">
+    	<input type="submit">
+    </form>
   </body>
 </html>
