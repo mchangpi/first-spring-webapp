@@ -23,7 +23,7 @@ public class ToDoController {
   @RequestMapping("listtodos")
   public String listAllToDos(ModelMap model){
     List<ToDo> toDos = toDoService.findByUsername("miltontest");
-    model.addAttribute("todos", toDos);
+    model.addAttribute("toDos", toDos);
     return "listToDos";
   }
 
