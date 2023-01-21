@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ToDoService {
-  private static List<ToDo> todos = new ArrayList<>();
+  
+  private static List<ToDo> todos = new ArrayList<ToDo>();
+  
   static {
     todos.add(new ToDo(1, "miltontest", "Learn AWS", LocalDate.now().plusYears(1), false));
     todos.add(new ToDo(2, "miltontest", "Learn DevOps", LocalDate.now().plusYears(2), false));

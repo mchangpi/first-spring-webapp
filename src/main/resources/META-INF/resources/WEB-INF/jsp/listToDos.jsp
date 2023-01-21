@@ -3,7 +3,7 @@
     <title>List ToDos Page</title>
   </head>
   <body>
-    <h4>Welcome to Milton Spring Boot app</h4>
+    <div>Welcome ${name}</div>
     <div>Your ToDos are ${todos}</div>
   </body>
 </html>
