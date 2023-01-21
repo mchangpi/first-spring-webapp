@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import jakarta.validation.Valid;
 
 @Service
 public class ToDoService {
   
+  private Logger logger = LoggerFactory.getLogger(getClass());
   private static List<ToDo> toDos = new ArrayList<ToDo>();
   
   private static int toDosCount = 0; 
@@ -27,6 +32,21 @@ public class ToDoService {
   public void addToDo(String username, String description, LocalDate targetDate, boolean done) {
     ToDo toDo = new ToDo(++toDosCount, username, description, targetDate, done);
     toDos.add(toDo);
+  }
+  
+  public ToDo findById(int id) {
+    Predicate<? super ToDo> checkToDoId = todo -> todo.getId() == id;
+    return toDos.stream().filter(checkToDoId).findFirst().get();
+  }
+  
+  public void updateToDo(@Valid ToDo toDo) {
+    logger.info("index " + toDo.getId());
+    for(int i = 0; i < toDos.size(); i++){
+      if(toDos.get(i).getId() == toDo.getId()) {
+        toDos.set(i, toDo);
+        break;
+      }
+    }
   }
   
   public void deleteById(int id) {

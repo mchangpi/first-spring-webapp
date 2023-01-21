@@ -3,11 +3,12 @@ package com.miltontest.springboot.miltonfirstwebapp.todo;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import jakarta.validation.Valid;
 @SessionAttributes("name")
 public class ToDoController {
   
+  private Logger logger = LoggerFactory.getLogger(getClass());
   private ToDoService toDoService;
   
   @Autowired
@@ -42,14 +44,35 @@ public class ToDoController {
   }
 
   @RequestMapping(value = "addtodo", method = RequestMethod.POST)
-  public String addToDoPage(ModelMap model, @Valid ToDo doDo, BindingResult result) {
+  public String addToDo(ModelMap model, @Valid ToDo toDo, BindingResult result) {
     
     if(result.hasErrors()) {
       return "addToDo";
     }
     
     toDoService.addToDo((String) model.get("name"), 
-        doDo.getDescription(), LocalDate.now().plusMonths(1), false);
+        toDo.getDescription(), toDo.getTargetDate(), false);
+    return "redirect:listtodos";
+  }
+
+  @RequestMapping(value = "updatetodo", method = RequestMethod.GET)
+  public String showUpdateToDo(@RequestParam int id, ModelMap model) {
+    ToDo toDo = toDoService.findById(id); 
+    model.addAttribute("toDo", toDo);
+    return "addToDo";
+  }
+
+  @RequestMapping(value = "updatetodo", method = RequestMethod.POST)
+  public String updateToDo(ModelMap model, @Valid ToDo toDo, BindingResult result) {
+
+    if(result.hasErrors()) {
+      return "addToDo";
+    }
+    toDo.setUsername((String) model.get("name"));
+    toDoService.updateToDo(toDo); 
+    
+    logger.info((String)model.get("name"));
+    logger.info(toDo.toString());
     return "redirect:listtodos";
   }
 

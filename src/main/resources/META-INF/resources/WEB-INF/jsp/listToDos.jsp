@@ -13,21 +13,21 @@
 			<table class="table">
 			<thead>
 				<tr>
-					<th>id</th>
 					<th>Description</th>
 					<th>Target Date</th>
 					<th>Is Done?</th>
+					<th></th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>		
 				<c:forEach items="${toDos}" var="toDo">
 					<tr>
-						<td>${toDo.id}</td>
 						<td>${toDo.description}</td>
 						<td>${toDo.targetDate}</td>
 						<td>${toDo.done}</td>
-						<td><a href="deletetodo?id=${toDo.id}" class="btn btn-warning">DELETE</a></td>
+						<td><a href="updatetodo?id=${toDo.id}" class="btn btn-success">Update</a></td>
+						<td><a href="deletetodo?id=${toDo.id}" class="btn btn-warning">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</tbody>
