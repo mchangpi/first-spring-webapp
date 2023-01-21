@@ -6,10 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
+import jakarta.validation.Valid;
 
 @Controller
 @SessionAttributes("name")
@@ -38,9 +42,14 @@ public class ToDoController {
   }
 
   @RequestMapping(value = "addToDo", method = RequestMethod.POST)
-  public String addToDoPage(ModelMap model, ToDo toDo) {
+  public String addToDoPage(ModelMap model, @Valid ToDo doDo, BindingResult result) {
+    
+    if(result.hasErrors()) {
+      return "addToDo";
+    }
+    
     toDoService.addToDo((String) model.get("name"), 
-        toDo.getDescription(), LocalDate.now().plusMonths(1), false);
+        doDo.getDescription(), LocalDate.now().plusMonths(1), false);
     return "redirect:listtodos";
   }
 }
