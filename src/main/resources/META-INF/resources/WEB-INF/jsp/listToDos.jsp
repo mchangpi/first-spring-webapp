@@ -7,9 +7,9 @@
   </head>
   <body>
   	<div class="container">
-		<div>Welcome ${name}</div>
+		<h4>Welcome ${name}</h4>
 		<hr>
-		<h4>Your ToDos are</h4>
+		<h5>Your ToDo List are</h5>
 			<table class="table">
 			<thead>
 				<tr>
@@ -30,6 +30,7 @@
 				</c:forEach>
 			</tbody>
 			</table>
+			<a href="addToDo" class="btn btn-success">Add ToDo</a>
 	</div>
 	<script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 	<script src="webjars/jquery/3.6.0/jquery.min.js"></script>
