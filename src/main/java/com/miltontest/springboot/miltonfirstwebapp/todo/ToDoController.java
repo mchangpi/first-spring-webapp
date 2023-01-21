@@ -34,14 +34,14 @@ public class ToDoController {
     return "listToDos";
   }
 
-  @RequestMapping(value = "addToDo", method = RequestMethod.GET)
+  @RequestMapping(value = "addtodo", method = RequestMethod.GET)
   public String newToDo(ModelMap model){
     ToDo toDo = new ToDo(0, (String) model.get("name"), "", LocalDate.now().plusMonths(1), false);
     model.put("toDo", toDo); //2-way binding, <form:form method = "post" modelAttribute = "toDo">
     return "addToDo";
   }
 
-  @RequestMapping(value = "addToDo", method = RequestMethod.POST)
+  @RequestMapping(value = "addtodo", method = RequestMethod.POST)
   public String addToDoPage(ModelMap model, @Valid ToDo doDo, BindingResult result) {
     
     if(result.hasErrors()) {
@@ -50,6 +50,12 @@ public class ToDoController {
     
     toDoService.addToDo((String) model.get("name"), 
         doDo.getDescription(), LocalDate.now().plusMonths(1), false);
+    return "redirect:listtodos";
+  }
+
+  @RequestMapping("deletetodo")
+  public String deleteToDo(@RequestParam int id){
+    toDoService.deleteById(id);
     return "redirect:listtodos";
   }
 }
