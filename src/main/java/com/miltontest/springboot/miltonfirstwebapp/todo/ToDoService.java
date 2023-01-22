@@ -20,13 +20,14 @@ public class ToDoService {
   private static int toDosCount = 0; 
   
   static {
-    toDos.add(new ToDo(++toDosCount, "miltontest", "Learn AWS", LocalDate.now().plusYears(1), false));
-    toDos.add(new ToDo(++toDosCount, "miltontest", "Learn DevOps", LocalDate.now().plusYears(2), false));
-    toDos.add(new ToDo(++toDosCount, "miltontest", "Learn DDD", LocalDate.now().plusYears(3), false));
+    toDos.add(new ToDo(++toDosCount, "milton", "Learn AWS", LocalDate.now().plusYears(1), false));
+    toDos.add(new ToDo(++toDosCount, "milton", "Learn DevOps", LocalDate.now().plusYears(2), false));
+    toDos.add(new ToDo(++toDosCount, "milton", "Learn DDD", LocalDate.now().plusYears(3), false));
   }
 
   public List<ToDo> findByUsername(String username){
-    return toDos;
+    Predicate<? super ToDo> checkToDoUserName = todo -> todo.getUsername().equalsIgnoreCase(username);
+    return toDos.stream().filter(checkToDoUserName).toList();
   }
   
   public void addToDo(String username, String description, LocalDate targetDate, boolean done) {

@@ -6,6 +6,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,7 +33,7 @@ public class ToDoController {
 
   @RequestMapping("listtodos")
   public String listAllToDos(ModelMap model){
-    List<ToDo> toDos = toDoService.findByUsername("miltontest");
+    List<ToDo> toDos = toDoService.findByUsername(getLoggedinUsername());
     model.addAttribute("toDos", toDos);
     return "listToDos";
   }
@@ -80,5 +82,10 @@ public class ToDoController {
   public String deleteToDo(@RequestParam int id){
     toDoService.deleteById(id);
     return "redirect:listtodos";
+  }
+
+  private String getLoggedinUsername() {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    return auth.getName();
   }
 }

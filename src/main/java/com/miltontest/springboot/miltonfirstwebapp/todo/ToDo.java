@@ -8,7 +8,7 @@ public class ToDo {
 
   private int id;
   private String username;
-  @Size(min=10, message="Please enter at least 10 characters")
+  @Size(min=5, message="Please enter at least 5 characters")
   private String description;
   private LocalDate targetDate;
   private boolean done;
