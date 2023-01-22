@@ -7,7 +7,7 @@
 		<form:form method = "post" modelAttribute = "toDo"><!-- 2 way binding -->
 			<fieldset>
 				<form:label path = "description">Description:</form:label>
-				<form:input type = "text" path = "description" required="required"/>	
+				<form:input type = "text" path = "description" required="required" size="50"/>	
 				<br>
 				<form:errors path="description" cssClass = "text-danger"/>
 			</fieldset>

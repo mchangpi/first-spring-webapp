@@ -2,10 +2,16 @@ package com.miltontest.springboot.miltonfirstwebapp.todo;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Size;
 
+@Entity(name="todo")
 public class ToDo {
 
+  @Id
+  @GeneratedValue
   private int id;
   private String username;
   @Size(min=5, message="Please enter at least 5 characters")
