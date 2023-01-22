@@ -18,22 +18,27 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import jakarta.validation.Valid;
 
-//@Controller
+@Controller
 @SessionAttributes("name")
-public class ToDoController {
+public class ToDoJpaController {
   
   private Logger logger = LoggerFactory.getLogger(getClass());
   private ToDoService toDoService;
+  private ToDoRepository toDoRepository;
   
   @Autowired
-  public ToDoController(ToDoService toDoService) {
+  public ToDoJpaController(ToDoService toDoService, ToDoRepository toDoRepository) {
     super();
     this.toDoService = toDoService;
+    this.toDoRepository = toDoRepository;
   }
 
   @RequestMapping("listtodos")
   public String listAllToDos(ModelMap model){
-    List<ToDo> toDos = toDoService.findByUsername(getLoggedinUsername());
+    //List<ToDo> toDos = toDoService.findByUsername(getLoggedinUsername());
+    
+    List<ToDo> toDos = toDoRepository.findByUsername(getLoggedinUsername());
+    
     model.addAttribute("toDos", toDos);
     return "listToDos";
   }
