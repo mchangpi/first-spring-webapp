@@ -31,10 +31,12 @@ public class ToDoJpaController {
     this.toDoRepository = toDoRepository;
   }
 
-  @RequestMapping("listtodos")
+  @RequestMapping(value={"", "/", "listtodos"})
   public String listAllToDos(ModelMap model){
     List<ToDo> toDos = toDoRepository.findByUsername(getLoggedInUsername());
+    toDos.sort((t1, t2) -> t1.getId() - t2.getId());
     model.addAttribute("toDos", toDos);
+    model.put("name", getLoggedInUsername());
     return "listToDos";
   }
 
