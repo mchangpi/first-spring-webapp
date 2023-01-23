@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jdk-jammy as builder
 WORKDIR /opt/app
-#ARG ARG1
+ARG DB_PW
 #ENV DB_PW=$ARG1
 RUN echo "The ARG variable DB_PW is $DB_PW"
 COPY .mvn/ .mvn
