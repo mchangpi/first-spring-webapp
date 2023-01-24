@@ -1,5 +1,5 @@
-<div th:replace="common/header">The Static Templates</div>
-<div th:replace="common/navigation">The Static Templates</div>
+<div th:replace="~{common/header}">The Static Templates</div>
+<div th:replace="~{common/navigation}">The Static Templates</div>
   	<div class="container">
 		<h4 th:text="'Welcome ' + ${name}"></h4>
 		<hr>
@@ -26,4 +26,4 @@
 			</table>
 			<a href="addtodo" class="btn btn-success">Add ToDo</a>
 	</div>
-<div th:replace="common/footer">The Static Templates</div>
+<div th:replace="~{common/footer}">The Static Templates</div>

@@ -41,7 +41,7 @@ public class ToDoService {
   }
   
   public void updateToDo(@Valid ToDo toDo) {
-    logger.info("index " + toDo.getId());
+    logger.debug("index " + toDo.getId());
     for(int i = 0; i < toDos.size(); i++){
       if(toDos.get(i).getId() == toDo.getId()) {
         toDos.set(i, toDo);

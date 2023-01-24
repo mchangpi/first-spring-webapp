@@ -1,5 +1,5 @@
-	<div th:replace="common/header">The Static Templates</div>
-	<div th:replace="common/navigation">The Static Templates</div>
+	<div th:replace="~{common/header}">The Static Templates</div>
+	<div th:replace="~{common/navigation}">The Static Templates</div>
 	<div class="container">
 		<h4>Enter ToDo Details</h4>
 		<hr>
@@ -27,7 +27,7 @@
 			<a href="listtodos" class="btn btn-warning mx-3" style="width: 80px">Cancel</a>
 		</form>
 	</div>
-	<div th:replace="common/footer">The Static Templates</div>
+	<div th:replace="~{common/footer}">The Static Templates</div>
 	<script type="text/javascript">
 		$('#targetDate').datepicker({
 			format: 'yyyy-mm-dd'
