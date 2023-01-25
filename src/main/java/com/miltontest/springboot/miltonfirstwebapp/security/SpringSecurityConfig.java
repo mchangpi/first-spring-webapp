@@ -17,6 +17,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration // Same as applicationContext.xml
 public class SpringSecurityConfig {
   
+  //@Component Preferable for component scanning and automatic wiring.
+  //@Bean annotation returns an object that spring should register as bean in application context.
   @Bean
   public InMemoryUserDetailsManager createUserDetailsMgr() {
     UserDetails user1 = createNewUser("milton", "test");
@@ -37,16 +39,21 @@ public class SpringSecurityConfig {
     return userDetails;
   }
   
-  //CSRF disabled
-  //Frames
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+    //All URLS are protected 
     http.authorizeHttpRequests(
         auth -> auth.anyRequest().authenticated());
     
+    //A login form is shown for unauthorized requests
     http.formLogin(withDefaults());
+    
     http.csrf().disable();
-    http.headers().frameOptions().disable();
+    
+    //To disable X-Frame-Options, because h2-console use frames
+    //http.headers().frameOptions().disable();
+    //http.headers().frameOptions().sameOrigin();
     
     return http.build();
   }
