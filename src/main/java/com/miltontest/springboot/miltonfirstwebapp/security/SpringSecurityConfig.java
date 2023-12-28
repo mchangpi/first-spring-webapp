@@ -52,8 +52,7 @@ public class SpringSecurityConfig {
     http.csrf().disable();
     
     //To disable X-Frame-Options, because h2-console use frames
-    //http.headers().frameOptions().disable();
-    //http.headers().frameOptions().sameOrigin();
+    http.headers().frameOptions().disable();
     
     return http.build();
   }
